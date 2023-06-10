@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
+[ExecuteInEditMode]
 public class CellBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject[] walls; // indexed as north, south, west, east
+
+    public bool[] testState;
+    
     void Start()
     {
-        
+        UpdateCell(testState);
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    void UpdateCell(bool[] state)
     {
-        
+        for (int i = 0; i < state.Length; i++)
+        {
+            walls[i].SetActive(!state[i]); // true = wall, false = no wall
+        }
     }
 }
